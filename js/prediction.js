@@ -1,264 +1,208 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get form elements
+document.addEventListener('DOMContentLoaded', async function() {
+    // 获取DOM元素
     const form = document.getElementById('prediction-form');
     const resetBtn = document.getElementById('reset-btn');
     const resultsCard = document.getElementById('results-card');
     const placeholderCard = document.getElementById('placeholder-card');
     
-    // Slider value updates
-    const metalContent = document.getElementById('metal-content');
-    const metalContentValue = document.getElementById('metal-content-value');
-    const humidity = document.getElementById('humidity');
-    const humidityValue = document.getElementById('humidity-value');
+    // 铂基选择单选按钮
+    const ptYesRadio = document.getElementById('pt-yes');
+    const ptNoRadio = document.getElementById('pt-no');
+    const metalElementsSection = document.getElementById('metal-elements-section');
+    const metalElementsSelect = document.getElementById('metal-elements');
     
-    if (metalContent && metalContentValue) {
-        metalContent.addEventListener('input', function() {
-            metalContentValue.textContent = this.value + '%';
-        });
+    let dataReady = false;
+
+    /**
+     * 初始化 - 加载所有数据和算法
+     */
+    async function initializeApp() {
+        try {
+            // 显示加载状态
+            if (form) {
+                form.querySelector('button[type="submit"]').disabled = true;
+                form.querySelector('button[type="submit"]').textContent = 'Loading data...';
+            }
+
+            // 加载数据
+            const loaded = await dataLoader.init();
+            if (!loaded) {
+                throw new Error('Failed to load data');
+            }
+
+            // 初始化算法
+            initAlgorithm(
+                dataLoader.getMassActivityData(),
+                dataLoader.getHalfWaveData()
+            );
+
+            dataReady = true;
+
+            // 恢复按钮
+            if (form) {
+                form.querySelector('button[type="submit"]').disabled = false;
+                form.querySelector('button[type="submit"]').textContent = 'Predict Half-Wave Potential';
+            }
+
+            console.log('✓ 应用初始化完成，数据已就绪');
+
+        } catch (error) {
+            console.error('✗ 初始化失败:', error);
+            alert('Failed to load application data. Please refresh the page.');
+        }
     }
-    
-    if (humidity && humidityValue) {
-        humidity.addEventListener('input', function() {
-            humidityValue.textContent = this.value + '%';
-        });
+
+    // 启动初始化
+    await initializeApp();
+
+    /**
+     * 监听铂基选择变化，动态显示/隐藏金属元素选择
+     */
+    function setupPlatinumToggle() {
+        const updateMetalElementsVisibility = () => {
+            if (ptNoRadio.checked) {
+                // 非铂基：显示金属元素输入
+                metalElementsSection.classList.remove('hidden');
+                metalElementsSelect.required = true;
+            } else if (ptYesRadio.checked) {
+                // 铂基：隐藏金属元素输入，清空输入
+                metalElementsSection.classList.add('hidden');
+                metalElementsSelect.value = '';
+                metalElementsSelect.required = false;
+            }
+        };
+
+        ptYesRadio.addEventListener('change', updateMetalElementsVisibility);
+        ptNoRadio.addEventListener('change', updateMetalElementsVisibility);
     }
-    
-    // Chart instance
-    let performanceChart = null;
-    
-    // Form submission
+
+    setupPlatinumToggle();
+
+    /**
+     * 表单提交处理
+     */
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form values
-            const catalystType = document.getElementById('catalyst-type').value;
-            const metalContentVal = document.getElementById('metal-content').value;
-            const supportMaterial = document.getElementById('support-material').value;
-            const surfaceArea = document.getElementById('surface-area').value;
-            const particleSize = document.getElementById('particle-size').value;
-            const temperature = document.getElementById('temperature').value;
-            const humidityVal = document.getElementById('humidity').value;
-            
-            // Validate required fields
-            if (!catalystType || !supportMaterial) {
-                alert('Please fill in all required fields (marked with *)');
+
+            if (!dataReady) {
+                alert('Data is still loading. Please try again.');
                 return;
             }
-            
-            // Generate simulated predictions
-            const predictions = generatePredictions(
-                catalystType, 
-                metalContentVal, 
-                supportMaterial,
-                surfaceArea,
-                particleSize,
-                temperature,
-                humidityVal
-            );
-            
-            // Display results
-            displayResults(predictions);
+
+            // 获取铂基选择
+            const isPt = ptYesRadio.checked;
+            const massActivityInput = document.getElementById('mass-activity-input').value;
+            let metalElements = null;
+
+            // 验证必填字段
+            if (!massActivityInput) {
+                alert('Please enter Mass Activity value');
+                return;
+            }
+
+            if (!isPt && !metalElementsSelect.value) {
+                alert('Please select a metal element for Non-Pt catalyst');
+                return;
+            }
+
+            // 获取金属元素并验证
+            if (!isPt) {
+                metalElements = metalElementsSelect.value.trim().toUpperCase();
+                
+                // 验证金属元素只能是Fe或Co
+                if (metalElements !== 'FE' && metalElements !== 'CO') {
+                    alert("Metal element must be 'Fe' or 'Co'");
+                    return;
+                }
+                
+                // 转换为标准格式 (首字母大写)
+                metalElements = metalElements.charAt(0) + metalElements.slice(1).toLowerCase();
+            }
+
+            // 进行预测
+            const massActivity = parseFloat(massActivityInput);
+            if (isNaN(massActivity) || massActivity < 0) {
+                alert('Please enter a valid mass activity value (≥ 0)');
+                return;
+            }
+
+            const result = performPrediction(isPt, massActivity, metalElements);
+            displayResults(result, isPt, metalElements, massActivityInput);
         });
     }
-    
-    // Reset button
+
+    /**
+     * 重置按钮处理
+     */
     if (resetBtn) {
         resetBtn.addEventListener('click', function() {
             form.reset();
-            metalContentValue.textContent = '20%';
-            humidityValue.textContent = '100%';
+            metalElementsSection.classList.add('hidden');
             resultsCard.classList.add('hidden');
             placeholderCard.classList.remove('hidden');
-            
-            if (performanceChart) {
-                performanceChart.destroy();
-                performanceChart = null;
-            }
         });
     }
-    
-    // Generate simulated predictions based on input parameters
-    function generatePredictions(catalystType, metalContent, support, surfaceArea, particleSize, temp, humidity) {
-        // Base values
-        let massActivity = 0.15;
-        let specificActivity = 0.25;
-        let ecsa = 60;
-        let stability = 75;
-        
-        // Adjust based on catalyst type
-        switch(catalystType) {
-            case 'pt-based':
-                massActivity *= 1.0;
-                specificActivity *= 1.0;
-                break;
-            case 'pt-alloy':
-                massActivity *= 1.3;
-                specificActivity *= 1.2;
-                stability += 10;
-                break;
-            case 'non-pgm':
-                massActivity *= 0.4;
-                specificActivity *= 0.5;
-                stability -= 15;
-                break;
-            case 'single-atom':
-                massActivity *= 1.5;
-                specificActivity *= 0.9;
-                stability += 5;
-                break;
-        }
-        
-        // Adjust based on metal content
-        const metalFactor = parseFloat(metalContent) / 20;
-        massActivity *= (0.5 + metalFactor * 0.5);
-        
-        // Adjust based on support material
-        switch(support) {
-            case 'graphene':
-                massActivity *= 1.15;
-                stability += 8;
-                break;
-            case 'cnt':
-                massActivity *= 1.1;
-                stability += 5;
-                break;
-        }
-        
-        // Adjust based on surface area
-        if (surfaceArea) {
-            const areaFactor = parseFloat(surfaceArea) / 250;
-            ecsa *= areaFactor;
-            massActivity *= (0.8 + areaFactor * 0.2);
-        }
-        
-        // Adjust based on particle size
-        if (particleSize) {
-            const sizeFactor = 3.5 / parseFloat(particleSize);
-            ecsa *= sizeFactor;
-            massActivity *= (0.9 + sizeFactor * 0.1);
-        }
-        
-        // Add some randomness for realism
-        massActivity *= (0.95 + Math.random() * 0.1);
-        specificActivity *= (0.95 + Math.random() * 0.1);
-        ecsa *= (0.95 + Math.random() * 0.1);
-        stability *= (0.95 + Math.random() * 0.1);
-        
-        return {
-            massActivity: massActivity.toFixed(3),
-            specificActivity: specificActivity.toFixed(2),
-            ecsa: ecsa.toFixed(1),
-            stability: Math.min(stability, 95).toFixed(1)
-        };
+
+    /**
+     * 执行预测
+     */
+    function performPrediction(isPt, massActivity, metalElements) {
+        // 调用算法
+        return predictionAlgorithm.predictHalfWave(isPt, massActivity, metalElements);
     }
-    
-    // Display prediction results
-    function displayResults(predictions) {
-        // Update metric values
-        document.getElementById('mass-activity').textContent = predictions.massActivity;
-        document.getElementById('specific-activity').textContent = predictions.specificActivity;
-        document.getElementById('ecsa').textContent = predictions.ecsa;
-        document.getElementById('stability').textContent = predictions.stability;
-        
-        // Show results card, hide placeholder
+
+    /**
+     * 显示预测结果
+     */
+    function displayResults(prediction, isPt, metalElements, massActivityInput) {
+        // 首先重置成功/错误消息框
+        const messageBox = resultsCard.querySelector('.bg-green-50, .bg-red-50');
+        if (messageBox) {
+            messageBox.className = 'bg-green-50 border-l-4 border-green-400 p-4';
+            messageBox.innerHTML = `<p class="text-sm text-green-800">
+                <strong>✓ Success:</strong> Prediction completed using actual database mapping.
+            </p>`;
+        }
+
+        if (prediction.success) {
+            // 更新结果值
+            const halfWaveValue = prediction.halfWavePotential.toFixed(3);
+            document.getElementById('half-wave-result').textContent = halfWaveValue;
+
+            // 更新源信息
+            document.getElementById('pdf-path').textContent = prediction.sourcePdf;
+
+            // 更新查询详情
+            const catalystTypeLabel = isPt ? 'Platinum (Pt)' : `${metalElements} (Non-Pt)`;
+
+            document.getElementById('cat-type').textContent = catalystTypeLabel;
+            document.getElementById('input-mass').textContent = massActivityInput;
+
+        } else {
+            // 预测失败 - 显示错误
+            document.getElementById('half-wave-result').textContent = 'ERROR';
+            document.getElementById('pdf-path').textContent = 'No match found';
+            
+            const catalystTypeLabel = isPt ? 'Platinum (Pt)' : `${metalElements} (Non-Pt)`;
+            document.getElementById('cat-type').textContent = catalystTypeLabel;
+            document.getElementById('input-mass').textContent = massActivityInput;
+
+            // 替换成功消息为错误消息
+            const successMsg = resultsCard.querySelector('.bg-green-50, .bg-red-50');
+            if (successMsg) {
+                successMsg.className = 'bg-red-50 border-l-4 border-red-400 p-4';
+                successMsg.innerHTML = `<p class="text-sm text-red-800">
+                    <strong>✗ Error:</strong> ${prediction.error}
+                </p>`;
+            }
+        }
+
+        // 显示结果卡片，隐藏占位符
         resultsCard.classList.remove('hidden');
         placeholderCard.classList.add('hidden');
-        
-        // Create performance chart
-        createPerformanceChart(predictions);
-        
-        // Scroll to results
+
+        // 滚动到结果
         resultsCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-    
-    // Create Chart.js visualization
-    function createPerformanceChart(predictions) {
-        const ctx = document.getElementById('performance-chart');
-        
-        if (!ctx) return;
-        
-        // Destroy existing chart
-        if (performanceChart) {
-            performanceChart.destroy();
-        }
-        
-        // Generate polarization curve data
-        const voltageData = [];
-        const currentData = [];
-        
-        for (let i = 0; i <= 10; i++) {
-            const current = i * 0.1;
-            const voltage = 1.0 - (current * 0.3) - (current * current * 0.15);
-            currentData.push(current);
-            voltageData.push(voltage);
-        }
-        
-        performanceChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: currentData,
-                datasets: [{
-                    label: 'Predicted Polarization Curve',
-                    data: voltageData,
-                    borderColor: '#1a73e8',
-                    backgroundColor: 'rgba(26, 115, 232, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Current Density (A/cm²)',
-                            font: {
-                                size: 12,
-                                weight: 'bold'
-                            }
-                        },
-                        grid: {
-                            display: true,
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Cell Voltage (V)',
-                            font: {
-                                size: 12,
-                                weight: 'bold'
-                            }
-                        },
-                        min: 0,
-                        max: 1.2,
-                        grid: {
-                            display: true,
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    }
-                },
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: false
-                }
-            }
-        });
     }
 });

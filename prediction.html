@@ -94,64 +94,33 @@
                     
                     <form id="prediction-form" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Catalyst Type *</label>
-                            <select id="catalyst-type" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                                <option value="">Select type...</option>
-                                <option value="pt-based">Platinum-based (Pt/C)</option>
-                                <option value="pt-alloy">Platinum Alloy</option>
-                                <option value="non-pgm">Non-Precious Metal</option>
-                                <option value="single-atom">Single Atom</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Metal Content (wt%) *</label>
-                            <div class="flex items-center space-x-4">
-                                <input type="range" id="metal-content" min="0" max="100" value="20" class="flex-1">
-                                <span id="metal-content-value" class="text-lg font-semibold text-primary w-16">20%</span>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Is Platinum-based? *</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" id="pt-yes" name="is-platinum" value="yes" class="mr-2" required>
+                                    <span class="text-slate-700">Yes (Pt)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" id="pt-no" name="is-platinum" value="no" class="mr-2" required>
+                                    <span class="text-slate-700">No (Non-Pt)</span>
+                                </label>
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Support Material *</label>
-                            <select id="support-material" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                                <option value="">Select support...</option>
-                                <option value="carbon-black">Carbon Black</option>
-                                <option value="graphene">Graphene</option>
-                                <option value="cnt">Carbon Nanotubes</option>
-                            </select>
+                        <div id="metal-elements-section" class="hidden">
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Metal Element *</label>
+                            <input type="text" id="metal-elements" placeholder="e.g., Fe or Co" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
+                            <p class="text-xs text-slate-500 mt-1">Only Fe (Iron) or Co (Cobalt) are supported</p>
                         </div>
 
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Surface Area (m²/g)</label>
-                            <input type="number" id="surface-area" placeholder="e.g., 250" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Particle Size (nm)</label>
-                            <input type="number" id="particle-size" placeholder="e.g., 3.5" step="0.1" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                        </div>
-
-                        <div class="border-t pt-6">
-                            <h3 class="text-lg font-semibold text-slate-900 mb-4">Operating Conditions</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Temperature (°C)</label>
-                                    <input type="number" id="temperature" value="80" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Humidity (%)</label>
-                                    <div class="flex items-center space-x-4">
-                                        <input type="range" id="humidity" min="0" max="100" value="100" class="flex-1">
-                                        <span id="humidity-value" class="text-lg font-semibold text-primary w-16">100%</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Mass Activity (A/mg) *</label>
+                            <input type="number" id="mass-activity-input" placeholder="e.g., 0.85" step="0.001" min="0" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
                         </div>
 
                         <div class="flex space-x-4 pt-4">
                             <button type="submit" class="flex-1 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-all shadow-sm hover:shadow-md">
-                                Predict Performance
+                                Predict Half-Wave Potential
                             </button>
                             <button type="button" id="reset-btn" class="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-all">
                                 Reset
@@ -165,37 +134,34 @@
                     <div id="results-card" class="bg-white rounded-xl shadow-md p-8 border border-slate-100 hidden">
                         <h2 class="text-2xl font-bold text-slate-900 mb-6">Prediction Results</h2>
                         
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="text-sm text-slate-600 font-medium">Mass Activity</div>
-                                <div class="text-2xl font-bold text-primary" id="mass-activity">--</div>
-                                <div class="text-xs text-slate-500">A/mg<sub>Pt</sub></div>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="text-sm text-slate-600 font-medium">Specific Activity</div>
-                                <div class="text-2xl font-bold text-primary" id="specific-activity">--</div>
-                                <div class="text-xs text-slate-500">mA/cm²</div>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="text-sm text-slate-600 font-medium">ECSA</div>
-                                <div class="text-2xl font-bold text-primary" id="ecsa">--</div>
-                                <div class="text-xs text-slate-500">m²/g</div>
-                            </div>
-                            <div class="bg-blue-50 rounded-lg p-4">
-                                <div class="text-sm text-slate-600 font-medium">Stability</div>
-                                <div class="text-2xl font-bold text-primary" id="stability">--</div>
-                                <div class="text-xs text-slate-500">% after 5000 cycles</div>
+                        <div class="grid grid-cols-1 gap-4 mb-6">
+                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
+                                <div class="text-sm text-slate-600 font-medium mb-2">Half-Wave Potential</div>
+                                <div class="text-4xl font-bold text-primary" id="half-wave-result">--</div>
+                                <div class="text-sm text-slate-500 mt-2">Volts (V)</div>
                             </div>
                         </div>
 
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-slate-900 mb-3">Performance Chart</h3>
-                            <canvas id="performance-chart"></canvas>
+                        <div class="space-y-4 mb-6">
+                            <div class="bg-slate-50 rounded-lg p-4">
+                                <h3 class="text-sm font-semibold text-slate-700 mb-2">Source Information</h3>
+                                <div class="text-sm text-slate-600" id="source-pdf">
+                                    <p>PDF Source: <span id="pdf-path" class="font-mono text-xs">--</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-50 rounded-lg p-4">
+                                <h3 class="text-sm font-semibold text-slate-700 mb-2">Query Details</h3>
+                                <div class="text-sm text-slate-600" id="query-details">
+                                    <p>Catalyst Type: <span id="cat-type" class="font-semibold">--</span></p>
+                                    <p>Mass Activity: <span id="input-mass" class="font-semibold">--</span> A/mg</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                            <p class="text-sm text-yellow-800">
-                                <strong>Note:</strong> These are simulated predictions for demonstration purposes.
+                        <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                            <p class="text-sm text-green-800">
+                                <strong>✓ Success:</strong> Prediction completed using actual database mapping.
                             </p>
                         </div>
                     </div>
@@ -214,6 +180,8 @@
         </div>
     </section>
 
+    <script src="js/data-loader.js"></script>
+    <script src="js/algorithm.js"></script>
     <script src="js/prediction.js"></script>
     <script src="js/main.js"></script>
 </body>
