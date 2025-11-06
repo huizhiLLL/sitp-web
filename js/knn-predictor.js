@@ -540,10 +540,9 @@ class KNNPredictor {
       return null;
     }
 
-    // Inverse distance weighted average
-    const weights = topK.map(d => 1 / (d.distance + 1e-8));
-    const weightSum = weights.reduce((a, b) => a + b);
-    const prediction = topK.reduce((sum, d, i) => sum + weights[i] * d.value, 0) / weightSum;
+    // Take the E_half value from the nearest neighbor (K=1)
+    const nearestNeighbor = topK[0];
+    const prediction = nearestNeighbor.value;
 
     return {
       E_half_V_predicted: Math.round(prediction * 10000) / 10000,
