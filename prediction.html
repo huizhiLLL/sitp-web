@@ -40,16 +40,10 @@
                 
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-slate-600 hover:text-primary transition-colors">Home</a>
-                    <a href="database.html" class="text-slate-600 hover:text-primary transition-colors">Database</a>
                     <a href="prediction.html" class="text-primary font-medium border-b-2 border-primary pb-1">Prediction Tool</a>
-                    <a href="documentation.html" class="text-slate-600 hover:text-primary transition-colors">Documentation</a>
                     <a href="about.html" class="text-slate-600 hover:text-primary transition-colors">About</a>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#" class="text-slate-600 hover:text-primary transition-colors">Login</a>
-                    <a href="#" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all shadow-sm hover:shadow-md">Sign Up</a>
-                </div>
                 
                 <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,9 +56,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-3">
                 <a href="index.html" class="block text-gray-600">Home</a>
-                <a href="database.html" class="block text-gray-600">Database</a>
                 <a href="prediction.html" class="block text-primary font-medium">Prediction Tool</a>
-                <a href="documentation.html" class="block text-gray-600">Documentation</a>
                 <a href="about.html" class="block text-gray-600">About</a>
             </div>
         </div>
@@ -87,102 +79,146 @@
     <!-- Main Content -->
     <section class="py-8 pb-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Input Form -->
-                <div class="bg-white rounded-xl shadow-md p-8 border border-slate-100 hover:shadow-lg transition-shadow">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Input Parameters</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Input Form (2 columns) -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-8 border border-slate-100 hover:shadow-lg transition-shadow">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">K-NN Catalyst Prediction</h2>
                     
-                    <form id="prediction-form" class="space-y-6">
+                    <form id="prediction-form" class="space-y-5">
+                        <!-- 1. Active Metal -->
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Is Platinum-based? *</label>
-                            <div class="flex space-x-4">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" id="pt-yes" name="is-platinum" value="yes" class="mr-2" required>
-                                    <span class="text-slate-700">Yes (Pt)</span>
-                                </label>
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" id="pt-no" name="is-platinum" value="no" class="mr-2" required>
-                                    <span class="text-slate-700">No (Non-Pt)</span>
-                                </label>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Active Metal *</label>
+                            <input type="text" id="input-metal" placeholder="e.g., Fe, Co, Pt, Fe/Co" 
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                                   required>
+                            <p class="text-xs text-slate-500 mt-1">Multiple metals separated by commas</p>
+                        </div>
+
+                        <!-- 2. MOF Name -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">MOF Name *</label>
+                            <input type="text" id="input-mof" placeholder="e.g., ZIF-8, MOF-5, HKUST-1"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                                   required>
+                        </div>
+
+                        <!-- 3. Main Form -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Main Form</label>
+                            <select id="input-form" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary">
+                                <option value="">Auto-infer</option>
+                                <option value="SA">SA (Single Atom)</option>
+                                <option value="Cluster">Cluster</option>
+                                <option value="Dual-atom">Dual-atom</option>
+                            </select>
+                            <p class="text-xs text-slate-500 mt-1">Auto-inferred based on metal type if empty</p>
+                        </div>
+
+                        <!-- 4. Ligand Type -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Ligand Type</label>
+                            <input type="text" id="input-ligand" placeholder="e.g., 2-methylimidazole, BDC, 2-MIM"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
+                        </div>
+
+                        <!-- 5. Pyrolysis Atmosphere -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Pyrolysis Atmosphere</label>
+                            <input type="text" id="input-atm" placeholder="e.g., N2, Ar, N2 then NH3"
+                                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
+                        </div>
+
+                        <!-- 6. Numerical Parameters (2x2 grid) -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Pyrolysis Temp (°C)</label>
+                                <input type="number" id="input-pyro-temp" placeholder="600-1200"
+                                       class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">BET (m²/g)</label>
+                                <input type="number" id="input-bet" placeholder="500-2000"
+                                       class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Rotation rpm</label>
+                                <input type="number" id="input-rpm" placeholder="800-2400"
+                                       class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Scan Rate (mV/s)</label>
+                                <input type="number" id="input-scan-rate" placeholder="5-200"
+                                       class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary">
                             </div>
                         </div>
 
-                        <div id="metal-elements-section" class="hidden">
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Metal Element *</label>
-                            <input type="text" id="metal-elements" placeholder="e.g., Fe or Co" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                            <p class="text-xs text-slate-500 mt-1">Only Fe (Iron) or Co (Cobalt) are supported</p>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Mass Activity (A/mg) *</label>
-                            <input type="number" id="mass-activity-input" placeholder="e.g., 0.85" step="0.001" min="0" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition">
-                        </div>
-
-                        <div class="flex space-x-4 pt-4">
+                        <!-- Buttons -->
+                        <div class="flex gap-3 pt-4">
                             <button type="submit" class="flex-1 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-all shadow-sm hover:shadow-md">
-                                Predict Half-Wave Potential
+                                🔮 Predict E_half
                             </button>
-                            <button type="button" id="reset-btn" class="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-all">
-                                Reset
+                            <button type="reset" id="reset-btn" class="px-6 py-3 border-2 border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition-all">
+                                ⟲ Reset
                             </button>
                         </div>
                     </form>
                 </div>
 
-                <!-- Results Section -->
-                <div class="space-y-6">
+                <!-- Results Section (1 column) -->
+                <div class="space-y-4">
+                    <!-- Prediction Result Card -->
                     <div id="results-card" class="bg-white rounded-xl shadow-md p-8 border border-slate-100 hidden">
-                        <h2 class="text-2xl font-bold text-slate-900 mb-6">Prediction Results</h2>
-                        
-                        <div class="grid grid-cols-1 gap-4 mb-6">
-                            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
-                                <div class="text-sm text-slate-600 font-medium mb-2">Half-Wave Potential</div>
-                                <div class="text-4xl font-bold text-primary" id="half-wave-result">--</div>
-                                <div class="text-sm text-slate-500 mt-2">Volts (V)</div>
+                        <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-6 border border-green-200 mb-4">
+                            <div class="text-xs text-slate-600 font-semibold mb-1">Predicted Half-Wave Potential</div>
+                            <div class="text-3xl font-bold text-primary" id="half-wave-result">--</div>
+                            <div class="text-sm text-slate-500 mt-1">vs RHE (V)</div>
+                        </div>
+
+                        <!-- Similarity Information -->
+                        <div class="bg-slate-50 rounded-lg p-4 mb-4 border border-slate-200">
+                            <h3 class="text-xs font-semibold text-slate-700 mb-2">⭐ Similarity</h3>
+                            <div id="similarity-info" class="text-xs text-slate-600 space-y-1">
+                                <p>Calculating...</p>
                             </div>
                         </div>
 
-                        <div class="space-y-4 mb-6">
-                            <div class="bg-slate-50 rounded-lg p-4">
-                                <h3 class="text-sm font-semibold text-slate-700 mb-2">Source Information</h3>
-                                <div class="text-sm text-slate-600" id="source-pdf">
-                                    <p>PDF Source: <span id="pdf-path" class="font-mono text-xs">--</span></p>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-slate-50 rounded-lg p-4">
-                                <h3 class="text-sm font-semibold text-slate-700 mb-2">Query Details</h3>
-                                <div class="text-sm text-slate-600" id="query-details">
-                                    <p>Catalyst Type: <span id="cat-type" class="font-semibold">--</span></p>
-                                    <p>Mass Activity: <span id="input-mass" class="font-semibold">--</span> A/mg</p>
-                                </div>
+                        <!-- Neighbor Samples -->
+                        <div id="neighbors-info" class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                            <h3 class="text-xs font-semibold text-slate-700 mb-2">🏆 Top-3 Neighbors</h3>
+                            <div id="neighbors-list" class="space-y-2 text-xs">
+                                <p class="text-slate-500">Loading...</p>
                             </div>
                         </div>
 
-                        <div class="bg-green-50 border-l-4 border-green-400 p-4">
-                            <p class="text-sm text-green-800">
-                                <strong>✓ Success:</strong> Prediction completed using actual database mapping.
+                        <!-- Success/Error Message -->
+                        <div id="message-box" class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm">
+                            <p class="text-green-800">
+                                <strong>✓ Success:</strong> Prediction completed
                             </p>
                         </div>
                     </div>
 
+                    <!-- Placeholder -->
                     <div id="placeholder-card" class="bg-white rounded-xl shadow-md p-8 border border-slate-100">
-                        <div class="text-center py-12">
-                            <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                            <h3 class="text-xl font-semibold text-slate-700 mb-2">Ready to Predict</h3>
-                            <p class="text-slate-500">Fill in the parameters and click "Predict Performance"</p>
+                        <div class="text-center py-8">
+                            <div class="text-3xl mb-2">🔬</div>
+                            <h3 class="text-lg font-semibold text-slate-700 mb-2">Ready</h3>
+                            <p class="text-sm text-slate-500">Fill in parameters and click "Predict"</p>
                         </div>
+                    </div>
+
+                    <!-- Information Tip -->
+                    <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-primary text-xs text-slate-700">
+                        <p><strong>💡 Tip:</strong> K-NN algorithm based on 54 MOF samples, calculating similarity across 9 weighted features.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="js/data-loader.js"></script>
-    <script src="js/algorithm.js"></script>
-    <script src="js/prediction.js"></script>
+    <!-- K-NN预测器脚本 -->
+    <script src="js/knn-predictor.js"></script>
+    <script src="js/prediction-knn.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

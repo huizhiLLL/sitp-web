@@ -1,0 +1,61 @@
+﻿Materials_Structure.Active_Metal,Materials_Structure.MOF_Name,Materials_Structure.Main_Form_SA_or_Cluster,Materials_Structure.Pyrolysis_Temp_C,Materials_Structure.Ligand_Type,Materials_Structure.Pyrolysis_Atmosphere,Materials_Structure.Active_Site_Type,Materials_Structure.BET_m2g,Experimental_Conditions.Rotation_rpm,Experimental_Conditions.Scan_Rate_mV_s,Experimental_Conditions.Electrolyte_Type,Materials_Structure.Metal_Introduction_Strategy,,,Electrochemical_Performance.E_half_V_vs_RHE
+Fe,ZIF-8,SA,,2-methylimidazole,,Fe-N4,1160,900,10,H2SO4,in-situ trapping,,,0.83
+Fe,ZIF-8,SA,,mIM,,FeNx,706.26,1600,10,0.1M HClO4,direct doping of Fe3+ into the ZIF lattice,,,0.81
+Fe,ZIF,SA,,mIM,CO2,Fe-N4O1,,900,,0.5 M H2SO4,adsorption,,,0.83
+"Pt, Co",ZIF-8,Cluster,700,,,,,,,0.1M HClO4,Adsorption of Co2+ ions with amino acid assistance,,,0.957
+"Co, Pt",ZIF-67,Cluster,900,2-methylimidazole,Ar,CoPt@Pt nanoalloy,,1600,10,0.1 M HClO4,Adsorption-annealing,,,0.93
+Fe,"MOF-5 (Zn4O(1,4-benzenedicarboxylate)3)",SA,800,"1,4-benzenedicarboxylate","N2, NH3",FeN4,,900,10,H2SO4,ligand-mediated approach with Fe(II)-phenanthroline complex,,,0.83
+"Pt, Co","bimetallic ZIF (Co, Zn)",Cluster,900,2-methylimidazole,5% H2/Ar,PtCo alloy,,1600,"['50', '10']",0.1 M HClO4,encapsulation in ZIF,,,0.931
+Fe,ZIF-8,SA,750,2-methylimidazole,Ar,O2-FeN4,,900,10,0.5 M H2SO4,chemical vapor deposition,,,0.85
+Fe,ZIF-8,SA,1000,2-methylimidazole,Ar,Fe-N4,1265,1600,10,"['0.5 M H2SO4', '0.1 M KOH']",in-situ doping,,,"['0.805', '0.871']"
+Fe,ZIF-8,SA,1000,2-methylimidazole,N2,FeN4,1483.2,1600,10,H2SO4,in-situ doping,,,0.8
+"Fe, Co",,Cluster,900,,N2,"Fe-N4, Co-N4",612,1900,10,0.5 M H2SO4,in-situ doping,,,0.71
+"Fe, Co",,SA,900,,N2,"Fe-N4, Co-N4",,1900,10,0.5 M H2SO4,in-situ doping,,,0.72
+Pt,HKUST-1,Cluster,700,"1,3,5-trimesic acid (H3BTC)",N2,,,,,0.1M HClO4,sol method,,,0.89
+Fe,Zn(mIm)2,SA,1050,2-methylimidazole,Ar,,1270,1600,10,0.1M HClO4,in-situ doping,,,0.785
+Fe,,SA,1000,,N2 and NH3,Fe-Nx,1382,900,,0.5 M H2SO4,direct mixing with metal oxides,,,0.815
+"Co, Fe",ZIF-8,SA,1000,mIM,N2,,736,1600,5,0.1M HClO4,in-situ doping,,,0.79
+"Fe, Ce",ZIF-8,SA,,mIM,,"Fe–N4, Ce–N4/O2",,,,0.1 M HClO4,in-situ doping,,,0.789
+Pt,ZIF,Cluster,600,mIM,H2/Ar,,,1600,,0.1M HClO4,solvothermal polyol synthesis,,,"['0.916', '0.925', '0.931']"
+Fe,ZIF-8,SA,1000,,Ar,Fe–N4,1039.6,,,0.5 M H2SO4,in-situ doping with FeZnHMT,,,0.806
+Fe,ZIF-8,SA,950,2-methylimidazole,"N2, NH3",Fe–N4,1011,1600,10,0.1 M HClO4,in-situ doping,,,0.803
+"Fe, Co",ZIF-8,Dual-atom,1000,2-methylimidazole,Ar,FeCoN5P1,,,10,0.5 M H2SO4,Precursor-preselected method using C34H28Cl2CoFeP2,,,0.771
+Fe,ZIF-8,SA,950,2-MIM,"Ar, then NH3",FeN4,,1600,5,0.1 M HClO4,in-situ doping,,,0.828
+Fe,ZIF-8,SA and Cluster,900,2-methylimidazole,Ar,Fe-N4,1181.687,900,,0.1 M HClO4,in-situ doping,,,0.838
+Fe,ZIF-8,SA,950,mIM,N2 then NH3,Fe-Nx,1043,1600,10,0.1 M HClO4,ball-milling with ferrocene,,,0.78
+Pt,ZIF-8,Cluster,950,2-methylimidazole,Ar,,,,,0.1 M HClO4,"microwave-assisted polyol reduction for Pt, in-situ doping for Ce",,,0.922
+Co,ZIF-Zn-Co,SA,950,mIM,Ar,Co-Nx and Se-C,,1600,5,0.5 M H2SO4,in-situ doping,,,0.764
+Fe,ZIF-8,SA,1000,mIM,Ar,FeN4,1371,900,10,0.1 M HClO4,in-situ doping,,,0.825
+Co,CoZn-ZIF,SA,1000,2-methylimidazole,N2,"Co-N4, deformed Co-N4",,900,10,0.1 M HClO4,in-situ doping during MOF synthesis,,,0.781
+"Pt, Co",ZIF-67@ZIF-8,SA,800,2-methylimidazole,Ar,,267.8,1600,5,0.1M HClO4,"Polyol method for Pt, in-situ from MOF for Co",,,0.872
+"Pt, Cu",ZIF-8,Cluster,1000,2-methylimidazole,Ar,,,1600,"['5', '50', '200']","['0.1 M KOH', '0.1 M HClO4']",In-situ doping via coordination with triphenylphosphine and encapsulation in ZIF-8,,,0.85
+"Pt, Co",ZIF-67,Cluster,850,2-methylimidazole,5 vol% H2/N2,,,1600,10,0.1 M HClO4,impregnation reduction method with self-sacrificial template,,,0.927
+Fe,ZIF-8,SA,1050,2-methylimidazole,Ar,,802,1600,10,0.5 M H2SO4,"one-pot synthesis with tris-1,10-phenanthroline iron (II) perchlorate",,,0.017
+Fe,ZIF-8,SA,1050,2-methylimidazole,Ar,,755,1600,10,0.5 M H2SO4,"post-synthesis mixing with tris-1,10-phenanthroline iron (II) perchlorate",,,0.026
+Fe,ZIF-8,SA,950,2-methylimidazole,Ar,Fe-N4,,"['800', '1200', '1600', '2000', '2400']",,0.1 M KOH,wet impregnation,,,0.366
+Fe,ZIF-8,Cluster,950,2-methylimidazole,Ar,Fe-N4/Fe4N6,,"['800', '1200', '1600', '2000', '2400']",,0.1 M KOH,wet impregnation with higher Fe loading,,,0.399
+Co,ZIF-67,Cluster,800,2-methylimidazole,N2,Co-Nx,313.7,1600,"['5', '50']",0.1 M KOH,MOF-derived,,,0.82
+Fe,ZIF-8,SA,1000,2-methylimidazole,N2,Fe-N4,1399.15,,10,H2SO4,in-situ doping,,,0.82
+Fe,ZIF-8,Cluster,900,"2-methylimidazole, 6-chloropurine",Ar,Fe-Nx,563.2,1600,"['5', '50']",0.1 M HClO4,in-situ doping,,,"['0.78', '0.86']"
+"Pt, Co",ZIF-67,Cluster,600,2-methylimidazole,N2,,,1600,10,0.1M HClO4,"in-situ growth of ZIF-67 on graphene oxide for Co, ethylene glycol reduction for Pt",,,0.86
+Fe,Fe-ZIF8,SA,1000,mIM,"Ar, then NH3",Fe–N4,1092,1600,5,0.1 M HClO4,in-situ doping,,,0.779
+"Pt, Co",ZIF-67,Cluster,800,2-methylimidazole,Ar,,303.028,"['800', '1200', '1600', '2000', '2400']","['50', '10']","['0.5 M H2SO4', '0.1 M KOH']",reflux method,,,0.84
+"Pt, Fe",ZIF-8,SA,900,2-methylimidazole,Ar,"Fe–N4/O4, Pt–N4",643,1600,,0.1 M HClO4,Ball milling and pyrolysis,,,"['0.80', '0.89']"
+"Pt, Fe",Zn/Fe-MOF,Cluster,280,,,"Fe-Nx, Pt nanoparticles",132,1600,"['50', '5']",0.1M HClO4,"Liquid impregnation for Fe, thermal reduction for Pt",,,0.883
+Fe,ZIF-8,SA,950,2-methylimidazole,Ar/NH3 (10% NH3),FeN4,,900,10,0.1 M H2SO4,in-situ doping,,,0.834
+Fe,ZIF-8,SA,950,"2-methylimidazole, 2-aminothiazole","Ar, then NH3/Ar (1:9)",Fe-Nx,625.3,900,10,0.1 M H2SO4,in-situ doping,,,0.82
+Co,ZIF-67,Cluster,700,mIM,H2,,,1600,,0.5 M H2SO4,in-situ from ZIF-67,,,0.68
+Co,ZIF-67,Cluster,700,mIM,H2,,,1600,,0.5 M H2SO4,in-situ from ZIF-67,,,0.71
+Ce,ZIF-8,SA,1150,mIM,N2,Ce-N4/O6,1095,1600,10,0.1 M HClO4,in-situ doping and gas-migration,,,0.862
+Fe,ZIF-8,SA,800,mIM,moist Ar,Fe–N4,1141,900,,0.1 M HClO4,in-situ doping,,,0.81
+Fe,ZIF-8,SA,,mIM,Ar,Fe–N4,507,900,,0.1 M HClO4,in-situ doping,,,0.798
+Fe,ZIF-8,SA,,,,Fe-N4,990,1600,,0.1 M HClO4,2-step pyrolysis activation/acid wash,,,0.729
+Fe,ZIF-8,SA,900,mIM,N2,Fe−N4,917,1600,,0.5 M H2SO4,Postsynthetic cation exchange,,,0.77
+Fe,NH2-MIL-101(Al),SA,,2-aminoterephthalic acid,,FeN3−O-AlN3,1530.9,,,"['0.5 M H2SO4', '0.1 M KOH']",Post-synthesis doping with Fe complex,,,"['0.830', '0.920']"
+Fe,GT-18,SA and Cluster,,,,Fe-N4,1020.3,,,0.5M H2SO4,solution immersion and pyrolysis,,,"['0.911', '0.819']"
+"Pt, Fe",ZIF-8,Cluster,900,2-methylimidazole,N2,"Fe–N4, Pt nanoparticles",,,,0.1 M HClO4,"In-situ doping for Fe, impregnation reduction for Pt",,,0.936
+"Pt,Co",ZIF-67,Cluster,700,2-methylimidazolate,,,1346.8,1600,10,0.1 M HClO4,impregnation and reduction,,,0.933
+Co,BMZIF (bimetallic ZIF-8/ZIF-67),SA,900,2-methylimidazole,Ar,Co-Nx,,1600,10,0.1 M HClO4,in-situ doping,,,0.77
+Co,ZIF-67,Cluster,900,2-methylimidazole,Ar,Co-Nx,234.3,1600,5,0.1 M KOH and 0.5 M H2SO4,in-situ doping,,,0.87
+Fe,ZIF-8,Cluster,1100,mIM,Ar,Fe-Nx,,1600,5,0.1 M HClO4,in-situ doping,,,0.84
+"Pt, Co, Ni",ZIF-8,Cluster,700,2-methylimidazole,N2,,,,5,0.1 M HClO4,"in-situ doping for Co, adsorption for Ni, reduction for Pt",,,0.885

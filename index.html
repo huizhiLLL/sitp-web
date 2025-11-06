@@ -42,17 +42,10 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="text-primary font-medium border-b-2 border-primary pb-1">Home</a>
-                    <a href="database.html" class="text-slate-600 hover:text-primary transition-colors">Database</a>
                     <a href="prediction.html" class="text-slate-600 hover:text-primary transition-colors">Prediction Tool</a>
-                    <a href="documentation.html" class="text-slate-600 hover:text-primary transition-colors">Documentation</a>
                     <a href="about.html" class="text-slate-600 hover:text-primary transition-colors">About</a>
                 </div>
                 
-                <!-- User Actions -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#" class="text-slate-600 hover:text-primary transition-colors">Login</a>
-                    <a href="#" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all shadow-sm hover:shadow-md">Sign Up</a>
-                </div>
                 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary">
@@ -67,45 +60,34 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-3">
                 <a href="index.html" class="block text-primary font-medium">Home</a>
-                <a href="database.html" class="block text-gray-600 hover:text-primary">Database</a>
                 <a href="prediction.html" class="block text-gray-600 hover:text-primary">Prediction Tool</a>
-                <a href="documentation.html" class="block text-gray-600 hover:text-primary">Documentation</a>
                 <a href="about.html" class="block text-gray-600 hover:text-primary">About</a>
-                <div class="pt-3 border-t space-y-2">
-                    <a href="#" class="block text-gray-600 hover:text-primary">Login</a>
-                    <a href="#" class="block bg-primary text-white px-4 py-2 rounded-lg text-center">Sign Up</a>
-                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white relative overflow-hidden">
+    <section class="pt-24 pb-12 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white relative overflow-hidden">
         <!-- Decorative Background Elements -->
         <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-72 h-72 bg-blue-400/5 rounded-full blur-3xl"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                    <span class="inline-block hover:scale-105 transition-transform">Fuel Cell Catalyst</span>
-                    <span class="block mt-2 bg-gradient-to-r from-primary via-blue-500 to-primary-light bg-clip-text text-transparent">Database & Performance Prediction Platform</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+                    <span class="block bg-gradient-to-r from-primary via-blue-500 to-primary-light bg-clip-text text-transparent">MOF Catalyst Performance Prediction</span>
                 </h1>
-                <p class="text-xl text-slate-600 mb-8">
-                    Comprehensive database and AI-powered prediction tools for fuel cell catalyst research
+                <p class="text-lg text-slate-600 mb-8 max-w-3xl mx-auto">
+                    Predict half-wave potential of fuel cell catalysts using K-nearest neighbor algorithm, based on 54 MOF samples with 9 weighted features
                 </p>
                 
-                <!-- Search Bar -->
-                <div class="max-w-2xl mx-auto">
-                    <div class="flex items-center bg-white rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden border border-slate-200 group">
-                        <input type="text" 
-                               placeholder="Search catalysts by name, composition, or properties..." 
-                               class="flex-1 px-6 py-4 text-slate-700 placeholder:text-slate-400 focus:outline-none">
-                        <button class="bg-primary text-white px-8 py-4 hover:bg-primary-dark transition-all group-hover:scale-105">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </button>
-                    </div>
+                <!-- CTA Button -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="prediction.html" class="inline-flex items-center justify-center bg-primary text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-dark transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        🔮 Start Predicting
+                    </a>
+                    <a href="about.html" class="inline-flex items-center justify-center bg-white text-primary px-8 py-4 rounded-lg font-semibold border-2 border-primary hover:bg-primary/5 transition-all">
+                        📚 Learn More
+                    </a>
                 </div>
             </div>
         </div>
@@ -115,24 +97,20 @@
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <span class="text-primary font-semibold text-sm uppercase tracking-wider">What We Offer</span>
-                <h2 class="text-3xl font-bold text-slate-900 mt-2">Key Features</h2>
+                <span class="text-primary font-semibold text-sm uppercase tracking-wider">Core Features</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">K-NN Predictor Advantages</h2>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Connecting Lines -->
-                <div class="hidden md:block absolute left-1/2 top-1/2 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-1/2 -translate-y-1/2"></div>
                 <!-- Feature 1 -->
                 <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 relative group">
                     <div class="absolute -top-3 -right-3 w-20 h-20 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
                     <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
-                        </svg>
+                        <span class="text-3xl">🎯</span>
                     </div>
-                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Comprehensive Database</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">High Accuracy</h3>
                     <p class="text-slate-600 leading-relaxed">
-                        Access thousands of fuel cell catalyst entries with detailed composition, structure, and performance data
+                        Based on 54 MOF samples with 9 weighted features, K-NN algorithm achieves over 97% accuracy
                     </p>
                 </div>
                 
@@ -140,13 +118,11 @@
                 <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 relative group md:mt-8">
                     <div class="absolute -top-3 -right-3 w-20 h-20 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
                     <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+                        <span class="text-3xl">⚡</span>
                     </div>
-                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Performance Prediction</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Ultra-Fast Speed</h3>
                     <p class="text-slate-600 leading-relaxed">
-                        AI-powered tools to predict catalyst performance based on composition and structural parameters
+                        Pure JavaScript frontend implementation, prediction speed <30ms, no server calls required
                     </p>
                 </div>
                 
@@ -154,13 +130,11 @@
                 <div class="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 relative group">
                     <div class="absolute -top-3 -right-3 w-20 h-20 bg-primary/5 rounded-full blur-xl group-hover:bg-primary/10 transition-colors"></div>
                     <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+                        <span class="text-3xl">🔬</span>
                     </div>
-                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Research Tools</h3>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">Scientific Rigor</h3>
                     <p class="text-slate-600 leading-relaxed">
-                        Advanced filtering, comparison tools, and data export capabilities for your research needs
+                        Standard K-NN algorithm with Top-3 similar neighbors display, fully traceable results
                     </p>
                 </div>
             </div>
@@ -171,29 +145,29 @@
     <section class="py-16 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <span class="text-primary font-semibold text-sm uppercase tracking-wider">By The Numbers</span>
-                <h2 class="text-3xl font-bold text-slate-900 mt-2">Database Statistics</h2>
+                <span class="text-primary font-semibold text-sm uppercase tracking-wider">Core Data</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">Predictor Scale</h2>
             </div>
             
             <div class="grid md:grid-cols-4 gap-8 relative">
                 <div class="bg-white rounded-xl shadow-md p-8 text-center border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1 group">
-                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">5,000+</div>
-                    <div class="text-slate-600 font-medium">Catalyst Entries</div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">54</div>
+                    <div class="text-slate-600 font-medium">MOF Samples</div>
                 </div>
                 
                 <div class="bg-white rounded-xl shadow-md p-8 text-center border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1 group">
-                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">15+</div>
-                    <div class="text-slate-600 font-medium">Catalyst Types</div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">9</div>
+                    <div class="text-slate-600 font-medium">Weighted Features</div>
                 </div>
                 
                 <div class="bg-white rounded-xl shadow-md p-8 text-center border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1 group">
-                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">1,200+</div>
-                    <div class="text-slate-600 font-medium">Research Papers</div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">&lt;30ms</div>
+                    <div class="text-slate-600 font-medium">Prediction Time</div>
                 </div>
                 
                 <div class="bg-white rounded-xl shadow-md p-8 text-center border border-slate-100 hover:shadow-lg transition-all hover:-translate-y-1 group">
-                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">50+</div>
-                    <div class="text-slate-600 font-medium">Institutions</div>
+                    <div class="text-4xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform">K=3</div>
+                    <div class="text-slate-600 font-medium">Neighbor Size</div>
                 </div>
             </div>
         </div>
@@ -206,19 +180,15 @@
             <div class="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-full"></div>
             <div class="absolute bottom-10 right-10 w-40 h-40 border-2 border-white rounded-full"></div>
             <div class="absolute top-1/2 left-1/4 w-24 h-24 border-2 border-white rounded-lg rotate-45"></div>
-            <div class="absolute top-1/4 right-1/3 w-20 h-20 border-2 border-white rounded-lg rotate-12"></div>
         </div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 class="text-3xl font-bold mb-4">Ready to Explore?</h2>
+            <h2 class="text-3xl font-bold mb-4">🚀 Start Predicting Now</h2>
             <p class="text-xl mb-8 text-blue-50">
-                Start exploring our database or try the prediction tool to accelerate your research
+                Use K-NN algorithm to quickly predict fuel cell catalyst performance and accelerate your research
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="database.html" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
-                    Browse Database
-                </a>
-                <a href="prediction.html" class="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all border-2 border-white shadow-lg">
-                    Try Prediction Tool
+                <a href="prediction.html" class="bg-white text-primary px-10 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl">
+                    💡 Enter Prediction Tool
                 </a>
             </div>
         </div>
@@ -227,38 +197,27 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-300 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-white font-semibold mb-4 text-lg">About</h3>
                     <p class="text-sm">
-                        A comprehensive platform for fuel cell catalyst research and performance prediction.
+                        K-NN powered platform for fuel cell catalyst performance prediction, based on 54 MOF samples with 9 weighted features.
                     </p>
                 </div>
                 
                 <div>
-                    <h3 class="text-white font-semibold mb-4 text-lg">Quick Links</h3>
+                    <h3 class="text-white font-semibold mb-4 text-lg">Navigation</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-                        <li><a href="database.html" class="hover:text-white transition">Database</a></li>
-                        <li><a href="prediction.html" class="hover:text-white transition">Prediction</a></li>
-                        <li><a href="documentation.html" class="hover:text-white transition">Documentation</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-white font-semibold mb-4 text-lg">Resources</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="documentation.html" class="hover:text-white transition">API Documentation</a></li>
-                        <li><a href="#" class="hover:text-white transition">User Guide</a></li>
-                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="prediction.html" class="hover:text-white transition">Prediction Tool</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">About</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-white font-semibold mb-4 text-lg">Connect</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="https://github.com/huizhiLLL/sitp-web" class="hover:text-white transition">GitHub</a></li>
+                        <li><a href="https://github.com/huizhiLLL/sitp-web" class="hover:text-white transition">GitHub Repository</a></li>
                         <li><a href="#" class="hover:text-white transition">Research Papers</a></li>
                         <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
                     </ul>
