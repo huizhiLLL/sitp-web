@@ -10,7 +10,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Predict', link: '/' },
       { text: 'Documentation', link: '/Introduction/whats-this' },
-      { text: 'About', link: '/About' }
+      { text: 'About', link: '/about' }
     ],
 
     sidebar: [
