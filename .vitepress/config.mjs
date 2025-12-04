@@ -30,7 +30,7 @@ export default defineConfig({
           { text: 'Building it yourself', link: '/Documentation/build' },
         ]
       },
-      {text: 'About', link: '/About'}
+      {text: 'About', link: '/about'}
     ],
 
     socialLinks: [
