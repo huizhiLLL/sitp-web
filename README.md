@@ -3,7 +3,6 @@
 [![VitePress](https://img.shields.io/badge/VitePress-1.0-646CFF?logo=vite&logoColor=white)](https://vitepress.dev/)
 [![React](https://img.shields.io/badge/React-18.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.0-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
 > 集成 **React 交互组件** 与 **VitePress 静态生成** 技术的性能预测平台。
 
