@@ -8,7 +8,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Predict', link: '/' },
+      { text: 'Predict', link: '/predict' },
       { text: 'Documentation', link: '/Introduction/whats-this' },
       { text: 'About', link: '/about' }
     ],
@@ -34,7 +34,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/huizhiLLL/FC-Predictor-web' }
+      { icon: 'github', link: 'https://github.com/huizhiLLL/FC-Catalyst-web' }
     ]
   }
 })

@@ -1,5 +1,12 @@
 node_modules
 
 .vitepress/cache
+.vitepress/dist
 
 dist
+
+docs/
+
+.kiro/
+
+.vscode/

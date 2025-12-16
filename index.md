@@ -15,8 +15,8 @@ hero:
       link: /Introduction/whats-this
 
 features:
-  - title: React-Based UI Architecture
-    details: Delivers a highly responsive and component-driven interface for a seamless user experience.
+  - title: Vue-Powered UI Architecture
+    details: Built with Vue 3 and VitePress, delivering a highly responsive and component-driven interface for a seamless user experience.
   - title: Precision AI Extraction
     details: Utilizes YOLO-based computer vision to automate high-accuracy data parsing from scientific literature.
   - title: ML-Powered Analytics
